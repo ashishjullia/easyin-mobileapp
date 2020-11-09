@@ -22,7 +22,9 @@ class QrScanResultDialog(var context : Context) {
     private  lateinit var dialog: Dialog
     private  var qrResult : AddIdentity? = null
 
-    var qrResultUrl = ""
+    private var qrResultUrl = ""
+    private var message = ""
+    private var file = ""
 
     init {
         initDialog()
@@ -41,8 +43,11 @@ class QrScanResultDialog(var context : Context) {
         dialog.show()
     }
     private fun Onclicks() {
-        dialog.saveResult.setOnClickListener {
-                saveResult(qrResultUrl)
+        dialog.getResult.setOnClickListener {
+                getResult(qrResultUrl)
+        }
+        dialog.postResult.setOnClickListener {
+            postResult(qrResultUrl)
         }
         dialog.cancelDialog.setOnClickListener {
             dialog.dismiss()
@@ -50,45 +55,59 @@ class QrScanResultDialog(var context : Context) {
         }
     }
 
-    private fun saveResult(Url: String) {
-        var message = ""
-        var file = ""
-        val httpGETAsync = Url.httpGet().responseJson { request, response, result ->
-                            when (result) {
-                                is Result.Failure -> {
-                                    val ex = result.getException()
-                                    println(ex)
-                                }
-                                is Result.Success -> {
-                                    val data = result.get().obj()
-                                    //textId.text = data["file"].toString()
-                                    message = data["message"].toString()
-                                    file = data["file"].toString()
-                                }
-                            }
-                        }
-                    httpGETAsync.join()
-                    println(httpGETAsync)
+    private fun getResult(Url: String) {
+        dialog.scannedText.text = Url
 
-                    println("1" + message)
-                    println("2" + file)
+        Url.httpGet().responseJson { request, response, result ->
+            when (result) {
+                is Result.Failure -> {
+                    val ex = result.getException()
+                    print(ex)
+                }
+                is Result.Success -> {
+                    val dataGET = result.get().obj()
+                    println("ONE" + " " + result.get().obj());
+                    println("TWO" + " " + dataGET["message"].toString())
+                    println("THREE" + " " + dataGET["file"].toString())
 
-                    val data = JSONObject()
-                    data.put("message", message)
-                    data.put("data", file)
+                    message = dataGET["message"].toString()
+                    file = dataGET["file"].toString()
+                    dialog.scannedText.text = "Data Captured"
 
-                    val httpPOSTAsync = "http://oneeasyin.com:8080/dashboard/postidentity".httpPost().header("Content-Type" to "application/json").body(data.toString()).responseJson {
-                            request, response, result ->
-                        when (result) {
-                            is Result.Failure -> {
-                                val ex = result.getException()
-                                println(ex)
-                            }
-                            is Result.Success -> {
-                                val data = result.get().obj()
-                                println(data)
-                            }
-                        }
-                    }
+                    println(message)
+                    println(file)
+                }
+            }
+        }
+        println(message)
+        println(file)
     }
-}
+
+private fun postResult(Url: String) {
+    //                    httpGETAsync.join()
+//                    println(httpGETAsync)
+
+//                    println("1"+message)
+//                    println("2"+file)
+//
+//                    val dataPOST = JSONObject()
+//                    dataPOST.put("message", message)
+//                    dataPOST.put("data", file)
+//
+//        println(dataPOST)
+//
+//                    val httpPOSTAsync = "http://oneeasyin.com:8080/dashboard/postidentity".httpPost().header("Content-Type" to "application/json").body(dataPOST.toString()).responseJson {
+//                            request, response, result ->
+//                        when (result) {
+//                            is Result.Failure -> {
+//                                val ex = result.getException()
+//                                println(ex)
+//                            }
+//                            is Result.Success -> {
+//                                val data = result.get().obj()
+//                                println(data)
+//                            }
+//                        }
+//                    }
+        }
+    }
