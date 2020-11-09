@@ -15,18 +15,18 @@ import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.FuelError
-import com.github.kittinunf.fuel.core.Request
-import com.github.kittinunf.fuel.core.Response
-import com.github.kittinunf.fuel.core.awaitResult
-import com.github.kittinunf.fuel.core.extensions.jsonBody
 import kotlinx.android.synthetic.main.activity_add_identity.*
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.concurrent.TimeUnit
 import java.util.jar.Manifest
 
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.FuelError
+import com.github.kittinunf.fuel.core.Request
+import com.github.kittinunf.fuel.core.Response
+import com.github.kittinunf.fuel.core.awaitResult
+import com.github.kittinunf.fuel.core.extensions.jsonBody
 import com.github.kittinunf.fuel.httpGet
 import com.github.kittinunf.fuel.httpPost
 import com.github.kittinunf.fuel.json.jsonDeserializer
@@ -35,6 +35,8 @@ import com.github.kittinunf.result.Result;
 import org.json.JSONObject
 import kotlin.reflect.typeOf
 
+
+import  com.example.easyin.QrScanResultDialog
 
 private const val CAMERA_REQUEST_CODE = 101
 
@@ -57,75 +59,57 @@ class AddIdentity : AppCompatActivity() {
             formats = CodeScanner.ALL_FORMATS
 
             autoFocusMode = AutoFocusMode.SAFE
-            scanMode = ScanMode.CONTINUOUS
+            scanMode = ScanMode.SINGLE
             isAutoFocusEnabled = true
             isFlashEnabled = false
 
-            var message = ""
-            var file = ""
+//            var message = ""
+//            var file = ""
 
             decodeCallback = DecodeCallback {
                 runOnUiThread {
-                    val httpGETAsync = it.text.toString()
-                        .httpGet().responseJson { request, response, result ->
-                            when (result) {
-                                is Result.Failure -> {
-                                    val ex = result.getException()
-                                    println(ex)
-                                }
-                                is Result.Success -> {
-                                    val data = result.get().obj()
-                                    textId.text = data["file"].toString()
-                                    message = data["message"].toString()
-                                    file = data["file"].toString()
-//                                    println(message)
-//                                    println(file)
-                                }
-                            }
-                        }
-                    httpGETAsync.join()
-                    println(httpGETAsync)
+                    it.text
 
-//                        .responseString { request, response, result ->
+                    var obj = QrScanResultDialog(context = this@AddIdentity)
+                    var result = obj.show(it.text)
+//                    val httpGETAsync = it.text.toString()
+//                        .httpGet().responseJson { request, response, result ->
 //                            when (result) {
 //                                is Result.Failure -> {
 //                                    val ex = result.getException()
 //                                    println(ex)
 //                                }
 //                                is Result.Success -> {
-//                                    val data = result.get()
-//                                    println(data)
-//                                    textId.text = data.
+//                                    val data = result.get().obj()
+//                                    textId.text = data["file"].toString()
+//                                    message = data["message"].toString()
+//                                    file = data["file"].toString()
 //                                }
 //                            }
 //                        }
-
-
-                    println("1" + message)
-                    println("2" + file)
-
-                    val data = JSONObject()
-                    data.put("message", message)
-                    data.put("data", file)
-//                    "http://oneeasyin.com:8080/dashboard/postidentity".httpPost().header("Content-Type" to "application/json").body(data.toString()).response { req, res, result ->
-//                        //Ought to be a Success!
-//                        println(res)
-//                    }
+//                    httpGETAsync.join()
+//                    println(httpGETAsync)
 //
-                    val httpPOSTAsync = "http://oneeasyin.com:8080/dashboard/postidentity".httpPost().header("Content-Type" to "application/json").body(data.toString()).responseJson {
-                            request, response, result ->
-                        when (result) {
-                            is Result.Failure -> {
-                                val ex = result.getException()
-                                println(ex)
-                            }
-                            is Result.Success -> {
-                                val data = result.get().obj()
-                                println(data)
-                            }
-                        }
-                    }
-                    //println(httpPOSTAsync)
+//                    println("1" + message)
+//                    println("2" + file)
+//
+//                    val data = JSONObject()
+//                    data.put("message", message)
+//                    data.put("data", file)
+//
+//                    val httpPOSTAsync = "http://oneeasyin.com:8080/dashboard/postidentity".httpPost().header("Content-Type" to "application/json").body(data.toString()).responseJson {
+//                            request, response, result ->
+//                        when (result) {
+//                            is Result.Failure -> {
+//                                val ex = result.getException()
+//                                println(ex)
+//                            }
+//                            is Result.Success -> {
+//                                val data = result.get().obj()
+//                                println(data)
+//                            }
+//                        }
+//                    }
                 }
             }
             errorCallback = ErrorCallback {
