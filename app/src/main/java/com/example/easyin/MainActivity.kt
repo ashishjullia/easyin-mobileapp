@@ -14,6 +14,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddIdentity::class.java)
             startActivity(intent)
         }
+        viewId.setOnClickListener {
+
+            val intent = Intent(this,ViewIdentity::class.java)
+            startActivity(intent)
+        }
         }
     }
 

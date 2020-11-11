@@ -11,10 +11,27 @@
         android:id="@+id/addId"
         android:layout_width="244dp"
         android:layout_height="37dp"
-
+        android:layout_marginStart="83dp"
         android:layout_marginTop="260dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="48dp"
         android:text="Add Identity"
+        app:layout_constraintBottom_toTopOf="@+id/viewId"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/viewId"
+        android:layout_width="244dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="84dp"
+        android:text="View Identity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
