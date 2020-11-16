@@ -1,38 +1,66 @@
 package com.example.easyin
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
-import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_view_identity.*
-import kotlinx.android.synthetic.main.record__view_layout.*
+import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.fuel.json.responseJson
+import com.github.kittinunf.result.Result
+import kotlinx.android.synthetic.main.activity_main_view_identities.*
+import org.json.JSONArray
+import java.lang.Exception
 
 class ViewIdentity : AppCompatActivity() {
-    private var titlesList = mutableListOf<String>()
-    private var imagesList = mutableListOf<Int>()
-
-    private lateinit var linearLayoutManager: LinearLayoutManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_identity)
-        postToList()
+        setContentView(R.layout.activity_main_view_identities)
 
 
-        linearLayoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = linearLayoutManager
+        var dataGetArrayFun = JSONArray()
 
+        val list = ArrayList<IdentityItem>()
 
-        recyclerView.adapter = RecyclerAdapter(titlesList, imagesList)
-    }
-    private fun addToList(title:String,image:Int) {
-        titlesList.add(title)
-        imagesList.add(image)
-    }
-    private fun postToList() {
-        for(i in 1..25) {
-            addToList("Title $i", R.mipmap.ic_launcher_round)
-        }
-    }
+//        fun getIdentities(){
+            "http://oneeasyin.com:8080/identity/".httpGet()
+                .responseJson { request, response, result ->
+                    when (result) {
+                        is Result.Failure -> {
+                            val ex = result.getException()
+                            print(ex)
+                        }
+                        is Result.Success -> {
+                            dataGetArrayFun = result.get().array()
+                            for (i in 0 until dataGetArrayFun.length()) {
+                                val item = IdentityItem(
+                                    dataGetArrayFun.getJSONObject(i).optString("_id"),
+                                    dataGetArrayFun.getJSONObject(i).optString("message")
+                                )
+                                list += item
+                            }
+                            recycler_view.adapter = IdentityAdaptor(list)
+                            recycler_view.layoutManager = LinearLayoutManager(this)
+                            recycler_view.setHasFixedSize(true)
+                        }
+                    }
+                }}}
 
-}
+//        Identity().getIdentities()
+//    }
+
+//    fun populate(list: ArrayList<IdentityItem>) {
+//        var llist : ArrayList<IdentityItem> = list
+//
+//        try {
+//            println("LIST is ->"+ " "+list[0].textKey + " "+ list[0].textKeyName )
+//
+//            recycler_view.adapter = IdentityAdaptor(llist)
+//            println("ADAPTOR "+ " "+recycler_view.adapter)
+//            recycler_view.layoutManager = LinearLayoutManager(this)
+//            recycler_view.setHasFixedSize(true)
+//        } catch (e: Exception) {
+//            println("ERR"+ " "+e.message)
+//        }
+//
+//    }
+//}

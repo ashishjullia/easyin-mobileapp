@@ -85,7 +85,7 @@ private fun postResult(Url: String) {
         dataPOST.put("data", file)
 
         println(dataPOST)
-            "http://oneeasyin.com:8080/dashboard/postidentity"
+            "http://oneeasyin.com:8080/identity/postidentity"
                 .httpPost()
                 .header("Content-Type" to "application/json")
                 .body(dataPOST.toString()).responseJson {
