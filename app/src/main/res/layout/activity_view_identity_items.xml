@@ -10,25 +10,13 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/text_view_key_name"
+            android:id="@+id/text_view_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Line 1"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/text_view_key"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Line 2"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_below="@id/text_view_key_name"/>
-
-
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

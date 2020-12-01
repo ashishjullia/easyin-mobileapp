@@ -52,32 +52,16 @@
             tools:text="TextView" />
 
         <Button
-            android:id="@+id/getResult"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="75dp"
-            android:layout_marginTop="88dp"
-            android:padding="10dp"
-            android:text="Get"
-            android:tint="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/postResult"
-            app:layout_constraintHorizontal_bias="0.104"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scannedText" />
-
-        <Button
             android:id="@+id/postResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="88dp"
             android:layout_marginEnd="75dp"
             android:padding="10dp"
-            android:text="Post"
+            android:text="Add Identity"
             android:tint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
-
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.663"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scannedText" />
     </androidx.constraintlayout.widget.ConstraintLayout>

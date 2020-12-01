@@ -14,21 +14,19 @@ import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-
         override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
+                addId.setOnClickListener {
+                    val intent = Intent(this, AddIdentity::class.java)
+                    startActivity(intent)
+                }
 
-            addId.setOnClickListener {
-                val intent = Intent(this, AddIdentity::class.java)
-                startActivity(intent)
+                viewId.setOnClickListener {
+                    val intent = Intent(this, ViewIdentity::class.java)
+                    startActivity(intent)
+                }
             }
-            viewId.setOnClickListener {
-                val intent = Intent(this, ViewIdentity::class.java)
-                startActivity(intent)
-            }
-        }
 
     }
 

@@ -1,3 +1,3 @@
 package com.example.easyin
 
-data class IdentityItem(val textKeyName: String, val textKey: String)
+data class IdentityItem(val textEmail: String)
