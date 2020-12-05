@@ -17,17 +17,17 @@ class MainActivity : AppCompatActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_main)
+                // This will start the "add identity" activity
                 addId.setOnClickListener {
                     val intent = Intent(this, AddIdentity::class.java)
                     startActivity(intent)
                 }
-
+                // This will start the "view identity" activity
                 viewId.setOnClickListener {
                     val intent = Intent(this, ViewIdentity::class.java)
                     startActivity(intent)
                 }
             }
-
     }
 
 

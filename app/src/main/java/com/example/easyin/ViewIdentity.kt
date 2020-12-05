@@ -24,8 +24,6 @@ class ViewIdentity : AppCompatActivity(), IdentityAdaptor.OnItemClickListener {
     val list = ArrayList<IdentityItem>()
     var emailIDSelected: String = ""
 
-//    var clickedItemValue =
-
     // Prepare BIOMETRIC
     private var cancellationSignal : CancellationSignal? = null
     private val authenticationCallback: BiometricPrompt.AuthenticationCallback
@@ -40,13 +38,9 @@ class ViewIdentity : AppCompatActivity(), IdentityAdaptor.OnItemClickListener {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
                     super.onAuthenticationSucceeded(result)
                     notifyUser("Authentication success!")
-
-                    // startActivity(Intent(this@Biometric, ViewIdentity::class.java))
-                    // Post request to (/login) with parsed values from recycler view list
                     login()
                 }
             }
-
 
     // GET the Identities
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +59,6 @@ class ViewIdentity : AppCompatActivity(), IdentityAdaptor.OnItemClickListener {
                         for (i in 0 until dataGetArrayFun.length()) {
                             val item = IdentityItem(
                                 dataGetArrayFun.getJSONObject(i).optString("email")
-//                                dataGetArrayFun.getJSONObject(i).optString("message")
                             )
                             list += item
                         }
@@ -85,15 +78,12 @@ class ViewIdentity : AppCompatActivity(), IdentityAdaptor.OnItemClickListener {
     }
 
     private fun prompt(item: IdentityItem) {
-//        Bio(context = this@ViewIdentity).buildPrompt()
         buildPrompt()
 
     }
 
-
     fun notifyUser(message : String) {
         Toast.makeText(this ,message, Toast.LENGTH_SHORT).show()
-
     }
 
     fun getCancellationSignal(): CancellationSignal {
@@ -111,7 +101,6 @@ class ViewIdentity : AppCompatActivity(), IdentityAdaptor.OnItemClickListener {
             .setNegativeButton("Cancel", this.mainExecutor, DialogInterface.OnClickListener { dialog, which ->
                 notifyUser("Authentication cancelled")
             }).build()
-
         biometricPrompt.authenticate(getCancellationSignal(), mainExecutor, authenticationCallback)
     }
 
@@ -131,9 +120,8 @@ class ViewIdentity : AppCompatActivity(), IdentityAdaptor.OnItemClickListener {
         } else true
     }
 
-
+    // Setting a fingerprint input
     fun login() {
-
         val dataPOST = JSONObject()
         dataPOST.put("email", emailIDSelected)
         dataPOST.put("status", true)
@@ -156,25 +144,7 @@ class ViewIdentity : AppCompatActivity(), IdentityAdaptor.OnItemClickListener {
                 }
             }
     }
-
-//        "http://oneeasyin.com:8080/users/login/passwordless"
-//            .httpPost()
-//            .header("Content-Type" to "application/json")
-//            .responseJson {
-//                    request, response, result ->
-//                when (result) {
-//                    is Result.Failure -> {
-//                        val ex = result.getException()
-//                        println(ex)
-//                    }
-//                    is Result.Success -> {
-//                        val data = result.get().obj()
-//                        println(data)
-//                    }
-//                }
-//            }
-//    }
-    }
+}
 
 
 

@@ -50,7 +50,6 @@ class AddIdentity : AppCompatActivity() {
         codeScanner()
     }
 
-
     private fun codeScanner() {
         codeScanner = CodeScanner(this, addId)
 
@@ -63,53 +62,13 @@ class AddIdentity : AppCompatActivity() {
             isAutoFocusEnabled = true
             isFlashEnabled = false
 
-//            var message = ""
-//            var file = ""
-
             decodeCallback = DecodeCallback {
                 runOnUiThread {
+                    // This works as a value holder for the scanned QR Code
                     it.text
-
                     var obj = QrScanResultDialog(context = this@AddIdentity)
+                    // Passing the scanned value to the "qr dialog"
                     var result = obj.show(it.text)
-//                    val httpGETAsync = it.text.toString()
-//                        .httpGet().responseJson { request, response, result ->
-//                            when (result) {
-//                                is Result.Failure -> {
-//                                    val ex = result.getException()
-//                                    println(ex)
-//                                }
-//                                is Result.Success -> {
-//                                    val data = result.get().obj()
-//                                    textId.text = data["file"].toString()
-//                                    message = data["message"].toString()
-//                                    file = data["file"].toString()
-//                                }
-//                            }
-//                        }
-//                    httpGETAsync.join()
-//                    println(httpGETAsync)
-//
-//                    println("1" + message)
-//                    println("2" + file)
-//
-//                    val data = JSONObject()
-//                    data.put("message", message)
-//                    data.put("data", file)
-//
-//                    val httpPOSTAsync = "http://oneeasyin.com:8080/dashboard/postidentity".httpPost().header("Content-Type" to "application/json").body(data.toString()).responseJson {
-//                            request, response, result ->
-//                        when (result) {
-//                            is Result.Failure -> {
-//                                val ex = result.getException()
-//                                println(ex)
-//                            }
-//                            is Result.Success -> {
-//                                val data = result.get().obj()
-//                                println(data)
-//                            }
-//                        }
-//                    }
                 }
             }
             errorCallback = ErrorCallback {
@@ -118,13 +77,10 @@ class AddIdentity : AppCompatActivity() {
                 }
             }
         }
-
         addId.setOnClickListener {
             codeScanner.startPreview()
         }
     }
-
-
 
     override fun onResume() {
         super.onResume()
@@ -155,6 +111,7 @@ class AddIdentity : AppCompatActivity() {
         )
     }
 
+    // Permission handler
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

@@ -20,11 +20,9 @@ import kotlin.reflect.typeOf
 
 class QrScanResultDialog(var context : Context) {
     private  lateinit var dialog: Dialog
-   // private  var qrResult : AddIdentity? = null
 
     private var qrResultUrl : String = ""
     var email : String = ""
-    var file : String = ""
 
     init {
         initDialog()
@@ -44,11 +42,6 @@ class QrScanResultDialog(var context : Context) {
         dialog.show()
     }
     private fun Onclicks() {
-//        dialog.getResult.setOnClickListener {
-////                getResult(qrResultUrl)
-//            dialog.scannedText.text = qrResultUrl
-//            email = qrResultUrl
-//        }
         dialog.postResult.setOnClickListener {
             postResult(qrResultUrl)
         }
@@ -57,35 +50,10 @@ class QrScanResultDialog(var context : Context) {
         }
     }
 
-//    private fun getResult(Url: String) {
-//        dialog.scannedText.text = Url
-//
-//        Url.httpGet().responseJson { request, response, result ->
-//            when (result) {
-//                is Result.Failure -> {
-//                    val ex = result.getException()
-//                    print(ex)
-//                }
-//                is Result.Success -> {
-//                    val dataGET = result.get().obj()
-////                    println("ONE" + " " + result.get().obj());
-////                    println("TWO" + " " + dataGET["message"].toString())
-////                    println("THREE" + " " + dataGET["file"].toString())
-//
-//                    email = dataGET["email"].toString()
-////                    file = dataGET["file"].toString()
-//                    dialog.scannedText.text = "Data Captured"
-//                }
-//            }
-//        }
-//    }
-
+// Adding an identity to the system
 private fun postResult(Url: String) {
-
-
         val dataPOST = JSONObject()
         dataPOST.put("email", email)
-//        dataPOST.put("data", file)
 
         println(dataPOST)
             "http://oneeasyin.com:8080/identity/postidentity"
@@ -105,6 +73,4 @@ private fun postResult(Url: String) {
                 }
             }
         }
-
-
     }

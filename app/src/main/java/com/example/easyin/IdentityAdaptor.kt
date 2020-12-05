@@ -19,25 +19,19 @@ class IdentityAdaptor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IdentityViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.activity_view_identity_items,
             parent, false)
-
-        println("KEYLIST "+ " "+keyList)
-
         return IdentityViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: IdentityViewHolder, position: Int) {
         val currentItem = keyList[position]
         holder.email.text = currentItem.textEmail
-//        holder.key.text = currentItem.textKey
     }
 
     override fun getItemCount() = keyList.size
 
     inner class IdentityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
     View.OnClickListener{
-//        val keyName: TextView = itemView.text_view_email
           val email: TextView = itemView.text_view_email
-//        val key: TextView = itemView.text_view_key
 
         init {
             itemView.setOnClickListener(this)
@@ -49,10 +43,7 @@ class IdentityAdaptor(
                 listener.onItemClick(position)
             }
         }
-
     }
-   
-
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
