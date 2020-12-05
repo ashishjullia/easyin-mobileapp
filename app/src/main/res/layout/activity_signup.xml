@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_background"
+            android:scaleType="fitCenter"
+            android:src="@drawable/logo" />
+
+
+        <EditText
+            android:id="@+id/firstName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_edit_background"
+            android:drawablePadding="10dp"
+            android:shadowColor="@color/hint_color"
+            android:tint="@color/colorAccent"
+
+            android:ems="10"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:paddingStart="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint_color"
+            android:textSize="21sp" />
+        <EditText
+            android:id="@+id/lastName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_edit_background"
+            android:drawablePadding="10dp"
+
+            android:ems="10"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:paddingStart="20dp"
+
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint_color"
+            android:textSize="21sp" />
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/login_edit_background"
+            android:drawablePadding="10dp"
+
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textPersonName"
+            android:paddingStart="20dp"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/hint_color"
+            android:textSize="21sp" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+
+            android:background="@drawable/login_edit_background"
+
+            android:paddingStart="20dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+
+            android:textColor="@color/black"
+            android:textColorHint="@color/hint_color"
+            android:textSize="21sp" />
+
+
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+
+            android:background="@drawable/button_background"
+            android:text="Sign up"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:gravity="end"
+            android:paddingTop="40dp"
+            android:text="Already have an account?"
+            android:background="@null"
+
+            android:textColor="@color/black" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:gravity="end"
+            android:padding="0dp"
+            android:text="Login"
+            android:background="@null"
+            android:textSize="21dp"
+
+            android:textColor="@color/colorPrimaryDark" />
+
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.easyin
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,10 @@ class IdentityAdaptor(
                 listener.onItemClick(position)
             }
         }
+
     }
+   
+
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
